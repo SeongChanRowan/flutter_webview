@@ -36,7 +36,7 @@ class _WebViewStackState extends State<WebViewStack> {
           },
           onNavigationRequest: (navigation) {
             final host = Uri.parse(navigation.url).host;
-            if (host.contains('youtube.com')) {
+            if (host != 'superbrainh2-client-admin.web.app') {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(
