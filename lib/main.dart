@@ -29,7 +29,7 @@ class _WebViewAppState extends State<WebViewApp> {
     super.initState();
     controller = WebViewController()
       ..loadRequest(
-        Uri.parse('https://www.rowan.kr/'),
+        Uri.parse('https://superbrainh2-client-admin.web.app/'),
       );
   }
 
@@ -37,7 +37,7 @@ class _WebViewAppState extends State<WebViewApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flame WebView'),
+        title: const Text('Flutter WebView'),
         actions: [
           NavigationControls(controller: controller),
           Menu(controller: controller),
