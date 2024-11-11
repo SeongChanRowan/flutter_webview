@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 class WebViewStack extends StatefulWidget {
   const WebViewStack({required this.controller, super.key});
@@ -11,6 +12,7 @@ class WebViewStack extends StatefulWidget {
 }
 
 class _WebViewStackState extends State<WebViewStack> {
+  FlutterTts flutterTts = FlutterTts();
   var loadingPercentage = 0;
 
   @override
@@ -57,7 +59,24 @@ class _WebViewStackState extends State<WebViewStack> {
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text(message.message)));
         },
+      )
+      ..addJavaScriptChannel(
+        'TtsChannel',
+        onMessageReceived: (JavaScriptMessage message) {
+          _speak(message.message);
+        },
       );
+    _initTts();
+  }
+
+  Future<void> _initTts() async {
+    await flutterTts.setLanguage('ko-KR');
+    await flutterTts.setPitch(1.0);
+    await flutterTts.setSpeechRate(0.5);
+  }
+
+  Future<void> _speak(String text) async {
+    await flutterTts.speak(text);
   }
 
   @override
